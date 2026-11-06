@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --color-cream: #f7f3ec;
-  --color-charcoal: #26221f;
-  --color-charcoal-soft: #3a3530;
-  --color-accent: #b8905a;
-  --color-accent-soft: #d9b98a;
-  --color-line: #e3dcd0;
+  --color-cream: #f8f4ec;
+  --color-charcoal: #16130f;
+  --color-charcoal-soft: #2b241d;
+  --color-accent: #bd8a46;
+  --color-accent-soft: #e0b97d;
+  --color-line: #e7dfd1;
 
   --font-heading: var(--font-playfair);
   --font-body: var(--font-inter);
@@ -24,7 +24,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis owns smooth scrolling; native smooth-scroll would fight it on anchor jumps. */
+  scroll-behavior: auto;
 }
 
 [id] {
@@ -44,17 +45,46 @@ h4 {
   font-family: var(--font-heading);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
 
+/* Oversized editorial display type for hero/section headlines. */
+.text-display {
+  font-family: var(--font-heading);
+  font-size: clamp(2.75rem, 1.2rem + 5vw, 7rem);
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+}
+
+.text-display-sm {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 1rem + 3.4vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.text-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
 }

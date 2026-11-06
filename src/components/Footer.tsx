@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { business } from "@/config/business";
-import { scrollToId } from "@/lib/scrollToId";
+import { useScrollTo } from "@/lib/useScrollTo";
 
 const NAV_LINKS = [
   { href: "services", label: "Services" },
@@ -13,6 +13,8 @@ const NAV_LINKS = [
 ];
 
 export default function Footer() {
+  const scrollTo = useScrollTo();
+
   return (
     <footer className="border-t border-line bg-charcoal pb-24 pt-14 text-cream sm:pb-14">
       <div className="mx-auto max-w-[1200px] px-6">
@@ -35,7 +37,7 @@ export default function Footer() {
             <ul className="mt-3 space-y-2 text-sm text-cream/70">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a href={`#${link.href}`} onClick={(e) => scrollToId(e, link.href)} className="hover:text-accent">
+                  <a href={`#${link.href}`} onClick={(e) => scrollTo(e, link.href)} className="hover:text-accent">
                     {link.label}
                   </a>
                 </li>

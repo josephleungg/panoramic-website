@@ -1,15 +1,15 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Accordion } from "@/components/ui/Accordion";
-import { Reveal } from "@/components/Reveal";
+import { FadeIn } from "@/components/FadeIn";
 import { business } from "@/config/business";
 
 export default function FAQ() {
   return (
-    <section id="faq" className="mx-auto max-w-[1200px] px-6 py-20 sm:py-28">
+    <section id="faq" className="mx-auto max-w-[1200px] px-6 py-24 sm:py-32">
       <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
-      <Reveal className="mx-auto mt-10 max-w-2xl">
+      <FadeIn className="mx-auto mt-14 max-w-2xl">
         <Accordion items={business.faq} />
-      </Reveal>
+      </FadeIn>
     </section>
   );
 }

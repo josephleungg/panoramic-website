@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Icon } from "@/components/ui/Icon";
+import hamburgerIcon from "@iconify-icons/solar/hamburger-menu-linear";
+import closeIcon from "@iconify-icons/solar/close-linear";
 import { business } from "@/config/business";
-import { scrollToId } from "@/lib/scrollToId";
+import { useScrollTo } from "@/lib/useScrollTo";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 const NAV_LINKS = [
   { href: "services", label: "Services" },
@@ -14,6 +18,13 @@ const NAV_LINKS = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const scrollTo = useScrollTo();
+
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.from(headerRef.current, { y: -24, autoAlpha: 0, duration: 0.8, delay: 0.1, ease: "power3.out" });
+  }, []);
 
   useEffect(() => {
     function onScroll() {
@@ -39,26 +50,27 @@ export default function Header() {
 
   return (
     <header
+      ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         solid ? "bg-cream shadow-sm" : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-5">
         <a
           href="#top"
-          onClick={(e) => scrollToId(e, "top")}
-          className={`font-heading text-lg transition-colors ${solid ? "text-charcoal" : "text-cream"}`}
+          onClick={(e) => scrollTo(e, "top")}
+          className={`font-heading text-xl tracking-tight transition-colors ${solid ? "text-charcoal" : "text-cream"}`}
         >
           {business.name}
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-10 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={`#${link.href}`}
-                onClick={(e) => scrollToId(e, link.href)}
-                className={`text-sm font-medium transition-colors hover:text-accent ${
+                onClick={(e) => scrollTo(e, link.href)}
+                className={`text-xs font-medium uppercase tracking-[0.14em] transition-colors hover:text-accent ${
                   solid ? "text-charcoal" : "text-cream"
                 }`}
               >
@@ -70,8 +82,8 @@ export default function Header() {
 
         <a
           href="#booking"
-          onClick={(e) => scrollToId(e, "booking")}
-          className="hidden rounded-full bg-accent px-5 py-2 text-sm font-medium text-charcoal transition-colors hover:bg-accent-soft md:inline-flex"
+          onClick={(e) => scrollTo(e, "booking")}
+          className="hidden rounded-full bg-accent px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-accent-soft md:inline-flex"
         >
           Book Now
         </a>
@@ -85,23 +97,7 @@ export default function Header() {
             solid ? "text-charcoal" : "text-cream"
           }`}
         >
-          <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-            {menuOpen ? (
-              <path
-                d="M6 6l12 12M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth={1.8}
-                strokeLinecap="round"
-              />
-            ) : (
-              <path
-                d="M4 7h16M4 12h16M4 17h16"
-                stroke="currentColor"
-                strokeWidth={1.8}
-                strokeLinecap="round"
-              />
-            )}
-          </svg>
+          <Icon icon={menuOpen ? closeIcon : hamburgerIcon} width={24} height={24} aria-hidden="true" />
         </button>
       </nav>
 
@@ -112,7 +108,7 @@ export default function Header() {
               key={link.href}
               href={`#${link.href}`}
               onClick={(e) => {
-                scrollToId(e, link.href);
+                scrollTo(e, link.href);
                 setMenuOpen(false);
               }}
               className="rounded-lg px-3 py-3 text-base font-medium text-charcoal hover:bg-charcoal/5"
@@ -123,7 +119,7 @@ export default function Header() {
           <a
             href="#booking"
             onClick={(e) => {
-              scrollToId(e, "booking");
+              scrollTo(e, "booking");
               setMenuOpen(false);
             }}
             className="mt-2 rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-charcoal"

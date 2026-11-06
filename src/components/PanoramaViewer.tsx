@@ -80,6 +80,12 @@ export default function PanoramaViewer() {
               nodes,
               startNodeId: scenes[0].id,
               transitionOptions: { showLoader: true, speed: "20rpm", effect: "fade", rotation: true },
+              // Our links all sit at pitch: 0 (straight ahead, eye level), but the default
+              // minPitch (0.3 rad, ~17°) clamps arrows upward away from that, so they render
+              // off from where you'd naturally look — only clickable by chance. Widen the
+              // range to include pitch 0.
+              arrowsPosition: { minPitch: -0.4, maxPitch: Math.PI / 2 },
+              arrowStyle: { size: { width: 96, height: 96 } },
             },
           ],
         ],

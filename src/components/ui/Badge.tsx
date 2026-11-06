@@ -9,7 +9,7 @@ export function Badge({
     neutral: "bg-charcoal/5 text-charcoal",
     accent: "bg-accent/15 text-accent",
     open: "bg-emerald-100 text-emerald-700",
-    closed: "bg-charcoal/10 text-charcoal/60",
+    closed: "bg-cream/10 text-cream/60",
   };
 
   return (

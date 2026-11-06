@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Input, Select, Textarea } from "@/components/ui/Field";
 import { Button, ButtonLink } from "@/components/ui/Button";
-import { Reveal } from "@/components/Reveal";
+import { FadeIn } from "@/components/FadeIn";
 import { business } from "@/config/business";
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
@@ -15,7 +15,7 @@ export default function Booking() {
 
   if (business.booking.useExternalUrl) {
     return (
-      <section id="booking" className="mx-auto max-w-[1200px] px-6 py-20 sm:py-28">
+      <section id="booking" className="mx-auto max-w-[1200px] px-6 py-24 sm:py-32">
         <SectionHeading
           eyebrow="Booking"
           title="Book Your Visit"
@@ -59,14 +59,14 @@ export default function Booking() {
   }
 
   return (
-    <section id="booking" className="mx-auto max-w-[1200px] px-6 py-20 sm:py-28">
+    <section id="booking" className="mx-auto max-w-[1200px] px-6 py-24 sm:py-32">
       <SectionHeading
         eyebrow="Booking"
         title="Book Your Visit"
         description="Send us your preferred time and we'll confirm by phone or email."
       />
 
-      <Reveal>
+      <FadeIn>
         <p className="mx-auto mt-4 max-w-2xl rounded-lg bg-charcoal/5 px-4 py-2 text-center text-xs text-charcoal/60">
           TODO: connect this form to a real booking tool (Fresha, Square Appointments, Calendly, or
           Acuity) or flip <code>business.booking.useExternalUrl</code> to send clients straight to one.
@@ -136,7 +136,7 @@ export default function Booking() {
             </Button>
           </form>
         )}
-      </Reveal>
+      </FadeIn>
     </section>
   );
 }

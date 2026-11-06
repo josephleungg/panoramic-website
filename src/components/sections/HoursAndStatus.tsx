@@ -21,7 +21,7 @@ export default function HoursAndStatus() {
   return (
     <div>
       <div className="mb-3 flex items-center gap-2">
-        <h3 className="font-heading text-lg text-charcoal">Hours</h3>
+        <h3 className="font-heading text-lg text-cream">Hours</h3>
         {status && (
           <Badge tone={status.open ? "open" : "closed"}>{status.open ? "Open now" : "Closed"}</Badge>
         )}
@@ -31,7 +31,7 @@ export default function HoursAndStatus() {
           {business.hours.map((day) => (
             <tr
               key={day.day}
-              className={day.day === status?.today ? "font-medium text-charcoal" : "text-charcoal/60"}
+              className={day.day === status?.today ? "font-medium text-cream" : "text-cream/50"}
             >
               <td className="py-1.5 pr-4">{day.day}</td>
               <td className="py-1.5 text-right">
